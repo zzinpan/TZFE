@@ -1,4 +1,3 @@
-
 import Vector2 from "./TZFE.Vector2.js";
 import Grid from "./TZFE.Grid.js";
 import Util from "./TZFE.Util.js";
@@ -8,16 +7,158 @@ import Direction from "./constant/TZFE.Direction.js";
 import Directions from "./constant/TZFE.Directions.js";
 import Plugin from "./plugin/TZFE.Plugin.js";
 
-/** 
- * @author zzinpan <zzinapn@kakao.com>
- * @version 1.0.0
- * @constructor
- * @description TZFE 생성자
- */
-function TZFE(){
+
+const Const = {
 	
-	this.grid = null;
-	this.store = [];
+	vector2: new Vector2()
+		
+};
+
+
+/** 
+ * TZFE description
+ */
+class TZFE {
+	
+	
+	grid;
+	store;
+	
+	
+	/** 
+	 * @author zzinpan <zzinapn@kakao.com>
+	 * @version 1.0.0
+	 * @description TZFE 생성자
+	 */
+	contstructor(){
+		
+		this.grid = null;
+		this.store = [];
+		
+	}
+	
+	
+	/** 
+	 * @author zzinpan <zzinapn@kakao.com>
+	 * @version 1.0.0
+	 * @description 기존 상태와 비교하여 변경 점이 있다면, 상태를 신규로 저장하고, 저장 여부 결과를 반환합니다.
+	 * @return {boolean} 저장 여부
+	 */
+	save(){
+		
+		const before = this.store[ this.store.length - 1 ];
+		
+		if( before == null ){
+			this.store.push( this.grid.clone() );
+			return true;
+		}
+		
+		
+		const isUpdate = this.grid.rows.some( ( nowRow, rowIndex ) => {
+			
+			return nowRow.some( ( nowBlock, columnIndex ) => {
+				
+				Const.vector2.set( columnIndex, rowIndex );
+				
+				const beforeBlock = before.getBlockByPosition( Const.vector2 );
+				
+				if( beforeBlock == null && nowBlock == null ){
+					return false;
+				}
+				
+				if( beforeBlock == null ){
+					return true;
+				}
+				
+				if( nowBlock == null ){
+					return true;
+				}
+
+				return nowBlock.equals( beforeBlock ) == false;
+				
+			} );
+			
+		} );
+
+		
+		if( isUpdate ){
+			
+			this.store.push( this.grid.clone() );
+			
+		}
+		
+		return isUpdate;
+		
+	}
+	
+	
+	/** 
+	 * @author zzinpan <zzinapn@kakao.com>
+	 * @version 1.0.0
+	 * @description 기존 상태와 비교하여 변경 점이 있다면, 상태를 신규로 저장하고, 저장 여부 결과를 반환합니다.
+	 * @param {TZFE.Direction} direction 이동시킬 방향
+	 * @return {TZFE.Block.Update[]} 업데이트된 블록 정보
+	 */
+	move( direction ){
+		
+		return this.grid.move( direction );
+		
+	}
+	
+	
+	/** 
+	 * @author zzinpan <zzinapn@kakao.com>
+	 * @version 1.0.0
+	 * @description 그리드를 완전히 초기화 시킵니다.
+	 * @param {number} [rowCount=this.grid.rowCount] 그리드 줄 갯수
+	 * @param {number} [rowCount=this.grid.columnCount] 그리드 열 갯수
+	 * @return {TZFE.Vector2} 초기화된 그리드의 줄, 열 갯수  
+	 */
+	clear( rowCount = this.grid.rowCount, columnCount = this.grid.rowCount ){
+		
+		this.grid = new Grid( rowCount, columnCount );
+		return new Vector2( rowCount, columnCount );
+		
+	}
+	
+	
+	/** 
+	 * @author zzinpan <zzinapn@kakao.com>
+	 * @version 1.0.0
+	 * @description 그리드를 완전히 초기화 시킵니다.
+	 * @param {number} [rowCount=new LevelBlock( Util.getRandomInteger( 1, 2 ) )] 추가할 블록
+	 * @return {TZFE.Vector2} 추가된 블록의 좌표  
+	 */
+	addBlock( block ){
+		
+		if( block == null ){
+			
+			block = new LevelBlock( Util.getRandomInteger( 1, 2 ) );
+			
+		}
+		
+		return this.grid.addBlock( block );
+		
+	}
+	
+	
+	print(){
+
+		console.log( this.grid.toString() );
+		
+	}
+	
+	
+	addPlugin( plugin ){
+		
+		if( plugin instanceof Plugin ){
+			
+			plugin.setup( TZFE );
+			
+		}
+		
+	}
+
 	
 }
 
@@ -30,101 +171,6 @@ TZFE.Direction = Direction;
 TZFE.Directions = Directions;
 
 
-/** 
- * @author zzinpan <zzinapn@kakao.com>
- * @version 1.0.0
- * @return {boolean} 저장 여부
- * @description 기존 상태와 비교하여 변경 점이 있다면, 상태를 신규로 저장하고, 저장 여부 결과를 반환합니다.
- */
-TZFE.prototype.save = function(){
-	
-	var vector2 = new Vector2();
-	var before = this.store[ this.store.length - 1 ];
-	
-	
-	if( before == null ){
-		this.store.push( this.grid.clone() );
-		return true;
-	}
-	
-	
-	var isUpdate = this.grid.rows.some( function( nowRow, rowIndex ){
-		
-		return nowRow.some( function( nowBlock, columnIndex ){
-			
-			var beforeBlock = before.getBlockByPosition( vector2.set( columnIndex, rowIndex ) );
-			
-			if( beforeBlock == null && nowBlock == null ){
-				return false;
-			}
-			
-			if( beforeBlock == null ){
-				return true;
-			}
-			
-			if( nowBlock == null ){
-				return true;
-			}
-
-			return nowBlock.equals( beforeBlock ) == false;
-			
-		} );
-		
-	} );
-
-	
-	if( isUpdate ){
-		this.store.push( this.grid.clone() );
-	}
-	
-	return isUpdate;
-	
-};
-
-/** 
- * @author zzinpan <zzinapn@kakao.com>
- * @version 1.0.0
- * @param {TZFE.Direction} direction 이동시킬 방향
- * @return {Array} 업데이트된 블록 정보가 전달됩니다. <TZFE.Block.Update>  
- * @description 기존 상태와 비교하여 변경 점이 있다면, 상태를 신규로 저장하고, 저장 여부 결과를 반환합니다.
- */
-TZFE.prototype.move = function( direction ){
-	
-	return this.grid.move( direction );
-	
-};
-
-TZFE.prototype.clear = function( rowCount, columnCount ){
-	
-	this.grid = new Grid( rowCount, columnCount );
-	
-};
-
-TZFE.prototype.addBlock = function( block ){
-	
-	if( block == null ){
-		block = new LevelBlock( Util.getRandomInteger( 1, 2 ) );
-	}
-	return this.grid.addBlock( block );
-	
-};
-
-TZFE.prototype.print = function(){
-
-	console.log( this.grid.toString() );
-	
-};
-
-
-TZFE.addPlugin = function( plugin ){
-	
-	if( plugin instanceof Plugin ){
-		
-		plugin.setup( TZFE );
-		
-	}
-	
-};
 
 export default TZFE;
 

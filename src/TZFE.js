@@ -15,8 +15,9 @@ const Const = {
 };
 
 
+
 /** 
- * TZFE description
+ * TZFE 종합 API
  */
 class TZFE {
 	
@@ -142,6 +143,11 @@ class TZFE {
 	}
 	
 	
+	/** 
+	 * @author zzinpan <zzinapn@kakao.com>
+	 * @version 1.0.0
+	 * @description 그리드를 콘솔로 출력합니다.
+	 */
 	print(){
 
 		console.log( this.grid.toString() );
@@ -149,6 +155,12 @@ class TZFE {
 	}
 	
 	
+	/** 
+	 * @author zzinpan <zzinapn@kakao.com>
+	 * @version 1.0.0
+	 * @description 플러그인을 추가합니다.
+	 * @param {TZFE.Plugin} plugin 추가할 플러그인
+	 */
 	addPlugin( plugin ){
 		
 		if( plugin instanceof Plugin ){
@@ -158,19 +170,19 @@ class TZFE {
 		}
 		
 	}
+	
+	
+	static Vector2 = Vector2;
+	static Util = Util;
+	static Grid = Grid;
+	static Block = Block;
+	static LevelBlock = LevelBlock;
+	static Direction = Direction;
+	static Directions = Directions;
+	static Plugin = Plugin;
 
 	
 }
 
-TZFE.Vector2 = Vector2;
-TZFE.Util = Util;
-TZFE.Grid = Grid;
-TZFE.Block = Block;
-TZFE.LevelBlock = LevelBlock;
-TZFE.Direction = Direction;
-TZFE.Directions = Directions;
-
-
 
 export default TZFE;
-

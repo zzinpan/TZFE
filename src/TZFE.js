@@ -17,7 +17,7 @@ const Const = {
 
 
 /** 
- * TZFE 종합 API
+ * TZFE API
  */
 class TZFE {
 	
@@ -29,7 +29,7 @@ class TZFE {
 	/** 
 	 * @author zzinpan <zzinapn@kakao.com>
 	 * @version 1.0.0
-	 * @description TZFE 생성자
+	 * @description TZFE 생성자입니다.
 	 */
 	contstructor(){
 		

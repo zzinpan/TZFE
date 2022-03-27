@@ -42,7 +42,7 @@ class Vector2{
 	 * @version 1.0.0
 	 * @param {number} [x=0] 기본 벡터 x 속성
 	 * @param {number} [y=0] 기본 벡터 y 속성
-	 * @description TZFE.Vector2 생성자
+	 * @description TZFE.Vector2 생성자입니다.
 	 */
 	constructor( x, y ){
 		
@@ -57,7 +57,7 @@ class Vector2{
 	/** 
 	 * @author zzinpan <zzinapn@kakao.com>
 	 * @version 1.0.0
-	 * @description 벡터 속성을 설정한다.
+	 * @description 벡터 속성을 설정합니다.
 	 * @param {number} [x=this.x] 벡터 x 속성
 	 * @param {number} [y=this.y] 벡터 y 속성
 	 * @returns {TZFE.Vector2} this
@@ -74,7 +74,7 @@ class Vector2{
 	/** 
 	 * @author zzinpan <zzinapn@kakao.com>
 	 * @version 1.0.0
-	 * @description 다른 벡터 속성을 this의 속성으로 복사한다.
+	 * @description 다른 벡터 속성을 this의 속성으로 복사합니다.
 	 * @param {TZFE.Vector2} vector2 복사에 참조할 벡터
 	 * @returns {TZFE.Vector2} this
 	 */
@@ -89,7 +89,7 @@ class Vector2{
 	/** 
 	 * @author zzinpan <zzinapn@kakao.com>
 	 * @version 1.0.0
-	 * @description this를 기준으로 새로운 벡터를 복사 생성한다.
+	 * @description this를 기준으로 새로운 벡터를 복사 생성합니다.
 	 * @returns {TZFE.Vector2} 복사된 벡터
 	 */
 	clone(){
@@ -102,7 +102,7 @@ class Vector2{
 	/** 
 	 * @author zzinpan <zzinapn@kakao.com>
 	 * @version 1.0.0
-	 * @description 벡터의 크기를 반환한다.
+	 * @description 벡터의 크기를 반환합니다.
 	 * @returns {number} 벡터의 크기
 	 */
 	length(){
@@ -115,7 +115,7 @@ class Vector2{
 	/** 
 	 * @author zzinpan <zzinapn@kakao.com>
 	 * @version 1.0.0
-	 * @description 벡터의 방향은 그대로 크기를 1로 변경한다.
+	 * @description 벡터의 방향은 그대로 크기를 1로 변경합니다.
 	 * @returns {tZFE.Vector2} this
 	 */
 	normalize(){
@@ -128,7 +128,7 @@ class Vector2{
 	/** 
 	 * @author zzinpan <zzinapn@kakao.com>
 	 * @version 1.0.0
-	 * @description 다른 벡터를 this에 곱한다.
+	 * @description 다른 벡터를 this에 곱합니다.
 	 * @param {tZFE.Vector2} vector2 곱할 벡터 
 	 * @returns {tZFE.Vector2} this
 	 */
@@ -145,7 +145,7 @@ class Vector2{
 	/** 
 	 * @author zzinpan <zzinapn@kakao.com>
 	 * @version 1.0.0
-	 * @description 실수를 this에 곱한다.
+	 * @description 실수를 this에 곱합니다.
 	 * @param {number} scalar 곱할 실수
 	 * @returns {tZFE.Vector2} this
 	 */
@@ -162,7 +162,7 @@ class Vector2{
 	/** 
 	 * @author zzinpan <zzinapn@kakao.com>
 	 * @version 1.0.0
-	 * @description this에서 다른 벡터를 나눈다.
+	 * @description this에서 다른 벡터를 나눕니다.
 	 * @param {TZFE.Vector2} vector2 나눌 벡터
 	 * @returns {tZFE.Vector2} this
 	 */
@@ -179,7 +179,7 @@ class Vector2{
 	/** 
 	 * @author zzinpan <zzinapn@kakao.com>
 	 * @version 1.0.0
-	 * @description this에서 실수를 나눈다.
+	 * @description this에서 실수를 나눕니다.
 	 * @param {number} scalar 나눌 실수
 	 * @returns {tZFE.Vector2} this
 	 */
@@ -193,7 +193,7 @@ class Vector2{
 	/** 
 	 * @author zzinpan <zzinapn@kakao.com>
 	 * @version 1.0.0
-	 * @description this에서 실수를 나눈다.
+	 * @description this에서 실수를 나눕니다.
 	 * @param {number} scalar 나눌 실수
 	 * @returns {tZFE.Vector2} this
 	 */

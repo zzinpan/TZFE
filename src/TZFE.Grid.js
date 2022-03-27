@@ -53,6 +53,7 @@ class Grid{
 	}
 
 	
+	
 	get yCount(){
 		
 		return this.rowCount;

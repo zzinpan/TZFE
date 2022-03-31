@@ -43,7 +43,7 @@ class Grid{
 		
 		this.rows = new Array( rowCount );
 		this.rows.fill();
-		this.rows.forEach( () => ( value, index, rows ){
+		this.rows.forEach( ( value, index, rows ) => {
 			
 			// Math.max를 위한 fill( null ): undefined의 경우, NaN을 반환
 			rows[ index ] = new Array( columnCount ).fill( null );
@@ -71,10 +71,10 @@ class Grid{
 	clone(){
 		
 		var original = this;
-		return original.rows.reduce( () => ( clone, originalRow, rowIndex ){
+		return original.rows.reduce( ( clone, originalRow, rowIndex ) => {
 			
 			var cloneRow = clone.rows[ rowIndex ];
-			originalRow.forEach( () => ( originalBlock, blockIndex ){
+			originalRow.forEach( ( originalBlock, blockIndex ) => {
 				
 				if( originalBlock == null ){
 					
@@ -323,9 +323,9 @@ class Grid{
 		}
 		
 		
-		this.rows.forEach( () => ( row ){
+		this.rows.forEach( ( row ) => {
 			
-			row.forEach( () => ( block ){
+			row.forEach( ( block ) => {
 				
 				if( block == null ){
 					return;
@@ -344,9 +344,9 @@ class Grid{
 
 	getBlanks(){
 		
-		return this.rows.reduce( () => ( blanks, row, y ){
+		return this.rows.reduce( ( blanks, row, y ) => {
 			
-			row.forEach( function( block, x ){
+			row.forEach( ( block, x ) => {
 				
 				if( block != null ){
 					return;
@@ -384,9 +384,9 @@ class Grid{
 	
 	getMaxLevelBlock(){
 		
-		var levelBlocks = this.rows.reduce( () => ( levelBlocks, row ){
+		var levelBlocks = this.rows.reduce( ( levelBlocks, row ) => {
 			
-			row.forEach( () => ( block ){
+			row.forEach( ( block ) => {
 				
 				if( block instanceof LevelBlock == false ){
 					return;
@@ -401,7 +401,7 @@ class Grid{
 		}, [] );
 		
 		
-		return levelBlocks.reduce( () => ( maxLevelBlock, levelBlock ){
+		return levelBlocks.reduce( ( maxLevelBlock, levelBlock ) => {
 			
 			if( levelBlock.value < maxLevelBlock.value ){
 				return maxLevelBlock;
@@ -419,7 +419,7 @@ class Grid{
 		for( var y=0; y<this.rows.length; ++y ){
 			
 			var row = this.rows[ y ];
-			var block = row.find(() => ( block ){
+			var block = row.find(( block ) => {
 				
 				return block != null && block.id == id;
 				
@@ -448,12 +448,12 @@ class Grid{
 		
 		
 		// ├─┼─┼─┤
-		var lineRow = Util.getLineString( this.columnCount, length, "├", "┼", "┤" );
-		var stringBuffer = this.rows.reduce( () => ( stringBuffer, row, index, blocks ){
+		var lineRow = Util.getLineString( this.columnCount, length, "├", "─", "┼", "┤" );
+		var stringBuffer = this.rows.reduce( ( stringBuffer, row, index, blocks ) => {
 			
 			
 			// │1│2│3│
-			var rowStringBuffer = row.map( () => ( levelBlock ){
+			var rowStringBuffer = row.map( ( levelBlock ) => {
 				
 				var value = "";
 				if( levelBlock != null ){
@@ -469,7 +469,7 @@ class Grid{
 			// 마지막 줄
 			if( index == blocks.length - 1 ){
 				
-				stringBuffer.push( Util.getLineString( self.columnCount, length, "└", "┴", "┘" ) );
+				stringBuffer.push( Util.getLineString( self.columnCount, length, "└", "─", "┴", "┘" ) );
 				
 			}else{
 				
@@ -481,7 +481,7 @@ class Grid{
 			return stringBuffer;
 			
 			
-		}, [ Util.getLineString( this.columnCount, length, "┌", "┬", "┐" ) ] );
+		}, [ Util.getLineString( this.columnCount, length, "┌", "─", "┬", "┐" ) ] );
 		
 		
 		return stringBuffer.join("\n");
